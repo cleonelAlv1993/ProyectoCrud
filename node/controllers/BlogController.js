@@ -1,5 +1,5 @@
 //importamos el modelo
-import BlogModel from "../models/BlogModel";
+import BlogModel from "../models/BlogModel.js";
 
 //Metodos para el CRUD
 
@@ -14,12 +14,12 @@ export const getAllBlogs = async (req, res) => {
 }
 
 //Mostrar un registro
-export const getBlog = (req, res)=> {
+export const getBlog = async (req, res)=> {
     try {
-        const blog = BlogModel.findAll({
+        const blog = await BlogModel.findAll({
             where:{ id:req.params.id }
         })
-        res.json(blog)
+        res.json(blog[0])
     } catch (error) {
         res.json( {message: error.message} )        
     }
